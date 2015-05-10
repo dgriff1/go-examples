@@ -19,3 +19,15 @@ func TestConvertDollars(t *testing.T) {
 	dollars := ConvertDollars(1234)
 	fmt.Printf("Dollars (%s)", dollars)
 }
+
+func TestLookupNumber(t *testing.T) {
+	val := LookupNumber(5)
+	if val != "five" {
+		t.Fatalf("Bad response %s ", val)
+	}
+
+	val = LookupNumber(25)
+	if val != "twenty five" {
+		t.Fatalf("Bad response %s ", val)
+	}
+}

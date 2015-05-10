@@ -36,11 +36,20 @@ var lookups = map[int]string{
 	90: "ninety",
 }
 
+func LookupNumber(num int) string {
+	if ret := lookups[num]; ret != "" {
+		return ret
+	} else {
+		ones := int(math.Mod(float64(num), 10))
+		tens := num - ones
+		return fmt.Sprintf("%s %s", lookups[tens], lookups[ones])
+	}
+}
+
 func ConvertDollars(dollars int) string {
 	var result string
 	for dollars > 0 {
 		place := int(math.Mod(float64(dollars), 100)) // will never be a float remainder
-		dollars -= place
 		dollars = dollars / 100
 		result = fmt.Sprintf(" %d %s ", place, result)
 		fmt.Printf("Place is %d dollars %d result %s\n", place, dollars, result)
