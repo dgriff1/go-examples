@@ -36,6 +36,15 @@ var lookups = map[int]string{
 	90: "ninety",
 }
 
+var place_names = []string{
+	" dollars",
+	" hundred and ",
+	" thousand and ",
+	" million and ",
+	" billion and ",
+	" trillion and ",
+}
+
 func LookupNumber(num int) string {
 	if ret := lookups[num]; ret != "" {
 		return ret
@@ -48,11 +57,12 @@ func LookupNumber(num int) string {
 
 func ConvertDollars(dollars int) string {
 	var result string
+	names := place_names
 	for dollars > 0 {
 		place := int(math.Mod(float64(dollars), 100)) // will never be a float remainder
 		dollars = dollars / 100
-		result = fmt.Sprintf(" %d %s ", place, result)
-		fmt.Printf("Place is %d dollars %d result %s\n", place, dollars, result)
+		result = fmt.Sprintf("%s%s%s", LookupNumber(place), names[0], result)
+		names = names[1:]
 	}
 	return result
 }

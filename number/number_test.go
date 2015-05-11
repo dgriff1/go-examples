@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -17,7 +16,9 @@ func TestParseString(t *testing.T) {
 
 func TestConvertDollars(t *testing.T) {
 	dollars := ConvertDollars(1234)
-	fmt.Printf("Dollars (%s)", dollars)
+	if dollars != "twelve hundred and thirty four dollars" {
+		t.Fatalf("Bad response %s ", dollars)
+	}
 }
 
 func TestLookupNumber(t *testing.T) {
